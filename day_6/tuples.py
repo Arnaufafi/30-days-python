@@ -35,7 +35,7 @@ print(f"The middle food is {middle_food}")
 
 # Slice out the first three items and the last three items from food_stuff_lt list
 first_slice = food_stuff_ls[:3]
-last_slice = food_stuff_ls[3:]
+last_slice = food_stuff_ls[-3:]
 
 print(f"The first slice is {first_slice}\nThe second slice is {last_slice}")
 
