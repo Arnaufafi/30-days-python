@@ -1,6 +1,8 @@
 # Day 11 - 30DaysOfPython Challenge
 
+import keyword
 from math import sqrt
+from countries_data import countries_data
 
 ## LEVEL 1
 
@@ -181,4 +183,161 @@ def sum_of_even(range):
         if i % 2 == 0:
             sum += i
         i+=1
-    return sum
+    return sum   
+
+## LEVEL 2
+
+# Declare a function named evens_and_odds . It takes a positive integer as parameter and it counts number of evens and odds in the number.
+def evens_and_odds(number):
+
+    evens, odds = 0, 0
+
+    for value in range(number + 1):
+        if value % 2 == 0:
+            evens += 1
+        else:
+            odds += 1
+    
+    return(evens, odds)
+    
+evens, odds = evens_and_odds(100)
+print(f"The number of odds are {odds}\nThe number of evens are {evens}")
+
+# Call your function factorial, it takes a whole number as a parameter and it return a factorial of the number
+def factorial(number):
+
+    factorial = 1
+
+    for value in range(1, number + 1):
+        factorial *= value
+    
+    return factorial
+
+print(f"The factorial of 5 is {factorial(5)}")
+
+# Call your function is_empty, it takes a parameter and it checks if it is empty or not
+def is_empty(param):
+    return not param
+
+# Write different functions which take lists. 
+# They should calculate_mean, calculate_median, calculate_mode, calculate_range, 
+# calculate_variance, calculate_std (standard deviation
+
+def calculate_mean(input_list):
+    total = sum(input_list)
+    return total / len(input_list)
+
+
+def calculate_median(input_list):
+    input_list.sort()
+    n = len(input_list)
+    mid = n // 2
+
+    if n % 2 == 0:
+        return (input_list[mid - 1] + input_list[mid]) / 2
+    else:
+        return (input_list[mid])
+
+def calculate_mode(input_list):
+    input_list.sort()
+
+    mode_number, actual_number, acumm , max = input_list[0], input_list[0], 0, 0
+
+    for number in input_list:
+        if number ==  actual_number:
+            acumm += 1
+            if acumm > max:
+                max = acumm
+                mode_number = number
+        else:
+            actual_number = number
+            acumm = 1
+
+    return mode_number
+
+def calculate_range(input_list):
+    input_list.sort()
+    return(input_list[0], input_list[-1])
+
+def calculate_variance(input_list):
+    mean = calculate_mean(input_list)
+    squared_diffs = [(x-mean) ** 2 for x in input_list]
+    variance = sum(squared_diffs) / len(input_list)
+    return variance
+
+def calculate_std(input_list):
+    return calculate_variance(input_list) ** 0.5
+
+# Write a function called greet which takes a default argument, name. 
+# If no argument is supplied it should print "Hello, Guest!", otherwise it should greet the person by name.
+
+def greet(name="Guest"):
+    print(f"Hello, {name}!")
+
+greet()
+greet("Pablo")
+
+# Create a function called show_args to take an arbitrary number of named arguments and print their names and values.
+
+def show_args(**args):
+    for name, value in args.items():
+        print(f"Name: {name}, Value: {value}")
+
+show_args(name="Alice", age=30, city="New York")
+show_args(name="Bob", pet="Fluffy, the bunny")
+
+## LEVEL 3
+
+# Write a function called is_prime, which checks if a number is prime.
+
+def is_prime(number):
+    if number <= 1:
+        return False
+    
+    if number % 2 == 0 and number != 2:
+        return False
+    
+    for i in range(3, int(number**0.5) + 1, 2):
+        if number % i == 0:
+            return False
+        
+    return True
+
+tests = [2, 7, 10, 97]
+for n in tests:
+    print(f"Number {n:<3} is {'Prime' if is_prime(n) else 'Not prime'}")
+
+# Write a functions which checks if all items are unique in the list.
+def unique_items(input_list):
+    new_set = set(input_list)
+    return (len(input_list) == len(new_set))
+
+# Write a function which checks if all the items of the list are of the same data type.
+def same_type(input_list):
+    return len({type(x) for x in input_list}) == 1
+
+# Write a function which check if provided variable is a valid python variable
+def valid_variable(variable):
+    return variable.isidentifier() and not keyword.iskeyword(variable)
+
+# Create a function called the most_spoken_languages in the world. It should return 10 or 20 most spoken languages in the world in descending order
+
+def most_spoken_languages(countries_data):
+    spoken_count = {}
+
+    for country in countries_data:
+        population = country["population"]
+        for language in country["languages"]:
+            spoken_count[language] = spoken_count.get(language, 0) + population
+
+    top20 = sorted(spoken_count.items(), key = lambda x: x[1], reverse=True)[:20]
+
+    return top20
+
+print(most_spoken_languages(countries_data))
+
+def most_populated_countries(countries_data):
+    
+    top20 = sorted(countries_data, key= lambda x: x["population"], reverse=True)[:20]
+
+    return top20
