@@ -40,3 +40,50 @@ def rgb_color_gen():
     return(f"rgb({random.randint(0,255)},{random.randint(0,255)},{random.randint(0,255)})" )
 
 print(rgb_color_gen())
+
+## LEVEL 2
+# Write a function list_of_hexa_colors which returns any number of hexadecimal colors in an array 
+# (six hexadecimal numbers written after #. Hexadecimal numeral system is made out of 16 symbols, 0-9 and first 6 letters of the alphabet, a-f.)
+def list_of_hexa_colors(number):
+    symbols = string.digits + "abcdef"
+    colors = []
+    color = "#"
+
+    for _ in range(number):
+        for _ in range(6):
+            color += random.choice(symbols)
+        colors.append(color)
+        color = "#"
+
+    return colors
+
+print(list_of_hexa_colors(3))
+
+# Write a function list_of_rgb_colors which returns any number of RGB colors in an array.
+def list_of_rgb_colors(number):
+    colors = []
+    for _ in range(number):
+        colors.append(rgb_color_gen())
+    
+    return colors
+
+print(list_of_rgb_colors(3))
+
+# Write a function generate_colors which can generate any number of hexa or rgb colors.
+def generate_colors(type, number):
+    colors = []
+    if type == "hexa":
+        colors = list_of_hexa_colors(number)
+    elif type == "rgb":
+        colors = list_of_rgb_colors(number)
+    else:
+        return None
+    
+    return colors
+
+print("RGB and Hexa generators")
+print(generate_colors('hexa', 3))
+print(generate_colors('hexa', 1))
+print(generate_colors('rgb', 3))
+print(generate_colors('rgb', 1))
+
