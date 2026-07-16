@@ -87,3 +87,26 @@ print(generate_colors('hexa', 1))
 print(generate_colors('rgb', 3))
 print(generate_colors('rgb', 1))
 
+## LEVEL 3
+#Call your function shuffle_list, it takes a list as a parameter and it returns a shuffled list
+def shuffle_list(input_list):
+    random.shuffle(input_list)
+    return input_list
+
+#Write a function which returns an array of seven random numbers in a range of 0-9. All the numbers must be unique.
+def seven_random():
+    symbols = [0,1,2,3,4,5,6,7,8,9]
+    output = []
+    for _ in range(7):
+        symbol = symbols[random.randint(0, len(symbols) - 1)]
+        output.append(symbol)
+        symbols.remove(symbol)
+    
+    return output
+
+# Variant
+def seven_random_var():
+    return random.sample(range(10), 7)
+
+
+
