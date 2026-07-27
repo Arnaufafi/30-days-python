@@ -179,3 +179,30 @@ def get_last_ten_countries(entry_list = countries_long):
 
 print(get_first_ten_countries())
 print(get_last_ten_countries())
+
+## LEVEL 3
+
+from countries_data import countries_data
+
+ # Sort countries by name, by capital, by population
+
+sorted_name = sorted(countries_data, key=lambda item: item["name"])
+sorted_capital = sorted(countries_data, key=lambda item: item["capital"])
+sorted_population = sorted(countries_data, key=lambda item: item["population"], reverse=True)
+
+# Sort out the ten most spoken languages by location.
+languages = {}
+for country in countries_data:
+    for language in country["languages"]:
+        if language not in languages:
+            languages[language] = 0
+        languages[language] += country["population"]
+
+most_spoken = sorted(languages.items(), key=lambda item: item[1], reverse=True)
+top_10_languages = most_spoken[:10]
+#print(top_10_languages)
+
+
+# Sort out the ten most populated countries.
+top_10_populated = sorted_population[:10]
+#print(top_10_populated)
