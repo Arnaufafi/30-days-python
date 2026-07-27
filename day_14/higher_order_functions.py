@@ -1,5 +1,6 @@
 # Day 14 - 30DaysOfPython Challenge
 
+from countries import countries_long
 # Explain the difference between map, filter, and reduce.
 
 # -----------------------------
@@ -156,3 +157,25 @@ def get_string_list(input_list):
 result = reduce(lambda x, y: x+y, numbers)
 print(result)
 
+# Use reduce to concatenate all the countries and to produce this sentence: 
+# Estonia, Finland, Sweden, Denmark, Norway, and Iceland are north European countries
+countries_sentence = reduce(lambda x,y: x + ", " + y, countries[:-1])
+countries_sentence = countries_sentence + f", and {countries[-1]}" 
+print(f"{countries_sentence} are north European countries")
+
+# Declare a function called categorize_countries that returns a list of countries with some common pattern 
+def categorize_countries(pattern, entry_list = countries_long):
+    return list(filter(lambda item: pattern.lower() in item.lower(), entry_list))
+
+print(categorize_countries("land"))
+
+# Declare a get_first_ten_countries function - it returns a list of first ten countries from the countries.py list in the data folder.
+def get_first_ten_countries(entry_list = countries_long):
+    return countries_long[:10]
+
+# Declare a get_last_ten_countries function that returns the last ten countries in the countries list.
+def get_last_ten_countries(entry_list = countries_long):
+    return countries_long[-10:]
+
+print(get_first_ten_countries())
+print(get_last_ten_countries())
